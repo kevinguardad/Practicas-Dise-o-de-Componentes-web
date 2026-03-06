@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Ejercicios Practicos del DOM</title>
+</head>
+<body>
+    <div class="contenedor">
+        <h2>Ejercicios Practicos del DOM</h2>
+         <div class="tarjeta">
+        <h3>Generador de saludo</h3>
+        <input type="text" id="nombre" placeholder="Ingresa tu nombre">
+        <button id="btnSaludar">Saludar</button>
+        <p id="mensaje" style="color: blue;"></p>
+
+    </div>
+    <div class="tarjeta">
+        <h3>Ejercicio de Suscripcion</h3>
+        <form id="formSuscripcion">
+            <label for="correoUsuario" >Correo Electrónico:</label>
+            <input type="email" id="correoUsuario" placeholder="ejemplo@dominio.com" required>
+            <button type="submit">Suscribirse</button>
+        </form>
+        <p id="mensajeEnvio" style="color: green;"></p>
+    </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
