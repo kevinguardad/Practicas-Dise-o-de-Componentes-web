@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrito de Compras</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+    }
+
+    input {
+      margin: 5px;
+      padding: 5px;
+    }
+
+    button {
+      margin: 5px;
+      padding: 5px;
+    }
+
+    .rojo {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <h1>🛒 Carrito de Compras</h1>
+
+  <!-- Inputs -->
+  <input v-model="nombre" placeholder="Nombre del producto">
+  <input v-model.number="precio" type="number" placeholder="Precio">
+  <button @click="agregarProducto">Agregar</button>
+
+  <!-- Mensaje -->
+  <p v-if="productos.length === 0">Tu carrito está vacío</p>
+
+  <!-- Lista -->
+  <ul>
+    <li v-for="(producto, index) in productos" :key="index">
+      {{ producto.nombre }} - ${{ producto.precio }}
+      <button @click="eliminarProducto(index)">Eliminar</button>
+    </li>
+  </ul>
+
+  <!-- Total -->
+  <h2 :class="{ rojo: total > 100 }">
+    Total: ${{ total }}
+  </h2>
+</div>
+
+<script>
+const { createApp, ref, computed } = Vue;
+
+createApp({
+  setup() {
+    const nombre = ref("");
+    const precio = ref(0);
+    const productos = ref([]);
+
+    const agregarProducto = () => {
+      if (nombre.value && precio.value > 0) {
+        productos.value.push({
+          nombre: nombre.value,
+          precio: precio.value
+        });
+        nombre.value = "";
+        precio.value = 0;
+      }
+    };
+
+    const eliminarProducto = (index) => {
+      productos.value.splice(index, 1);
+    };
+
+    const total = computed(() => {
+      return productos.value.reduce((sum, p) => sum + p.precio, 0);
+    });
+
+    return {
+      nombre,
+      precio,
+      productos,
+      agregarProducto,
+      eliminarProducto,
+      total
+    };
+  }
+}).mount("#app");
+</script>
+
+</body>
+</html>
